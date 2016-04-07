@@ -72,7 +72,7 @@ namespace UserCountWithRedis.Controllers
                     //bool isAdmin = Context.Request.Headers["Referer"].Contains("Admin"); //Disconnect'e Url bilgisi gelmiyor.
                     //if (!isAdmin)
                     UserClass.users.Remove(clientId); //Hicbir zaman admin olmadigi icin kontrole gerek yok.
-                    await CheckAndSetUserCount(client, UserClass.users.Count(), false, false); //Burasi Kaldirilir ise reconnection durumundaki istisnayi durum ortadan kaldirilir.
+                    await CheckAndSetUserCount(client, UserClass.users.Count(), false, false); 
                 }
             }
         }
@@ -85,7 +85,7 @@ namespace UserCountWithRedis.Controllers
             {
                 await Groups.Add(Context.ConnectionId, "admin");
             }
-            else if (!client.ContainsKey("UserCount"))
+            else if (!client.ContainsKey("UserCount")) // && isConnect==true eklenirse reconnect durumunda Console'a deger yanlış yere gönderilmez.
             {
                 lock (UserClass.lockObject)
                 {
