@@ -1,0 +1,61 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin</title>
+    <script src="~/scripts/jquery-2.2.2.min.js"></script>
+    <script src="~/scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script>
+        var hubProxy = $.connection.product;
+        $.connection.hub.logging = true;
+        $.connection.hub.start().done(function () {
+            console.log("hub.start.done");
+        }).fail(function (error) {
+            console.log(error);
+        });
+
+        hubProxy.client.refreshUserCount = function (data) {
+            console.log(data);
+            var serverName = data.split('æ')[0];
+            var userCount = data.split('æ')[1];
+            //var bodyHtml = "<tr><td>" + serverName + "</td><td>" + userCount + "</td></tr>";            
+            //$('#tbody').html(bodyHtml);                        
+            $('#' + serverName).html(userCount);
+        };
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Sunuculara Gore Online User Sayisi</h1>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sunucu Ismi</th>
+                <th>Anlik User Sayisi</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <tr>
+                <td>Bora Server 1</td>
+                <td id="BoraServer1"></td>
+            </tr>
+            <tr>
+                <td>Bora Server 2</td>
+                <td id="BoraServer2">0</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
