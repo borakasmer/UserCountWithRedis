@@ -22,6 +22,11 @@ namespace UserCountWithRedis.Controllers
         {
             return View();
         }
+        
+        public ActionResult Global()
+        {
+            return View();
+        }  
     }
 
     public class Product : Hub

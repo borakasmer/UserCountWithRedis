@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Global</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script>
+        function listener(event) {
+            if (event.origin !== "http://localhost:3453") {
+                return;
+            }
+            if (event.data.trim() != "") {
+                console.log(event.data);
+                document.getElementById("message").innerHTML = event.data;
+            }
+        }
+
+        if (window.addEventListener) {
+            addEventListener("message", listener, false)
+        } else {
+            attachEvent("onmessage", listener)
+        }
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1><font color="red"><span id="message"></span></font></h1>
+        </div>
+    </div>
+    <div class="text-center">
+        <iframe src="http://localhost:3453/Home/Admin" width="350" height="350" id="messageFrame" scrolling="no"></iframe>        
+    </div>
+</body>
+</html>
+ 
