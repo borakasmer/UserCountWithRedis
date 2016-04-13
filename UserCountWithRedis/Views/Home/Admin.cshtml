@@ -30,7 +30,7 @@
             //var bodyHtml = "<tr><td>" + serverName + "</td><td>" + userCount + "</td></tr>";            
             //$('#tbody').html(bodyHtml);                        
             $('#' + serverName).html(userCount);
-            parent.postMessage(userCount, "http://localhost:3453");
+            parent.postMessage(data, "http://localhost:3453");
         };
 
     </script>

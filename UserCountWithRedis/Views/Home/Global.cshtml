@@ -11,13 +11,20 @@
     <title>Global</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <script>
+        var server1 = 0;
+        var server2 = 0;
         function listener(event) {
-            if (event.origin !== "http://localhost:3453") {
+            if (event.origin !== "http://localhost:3453" && event.origin !== "http://localhost:78") {
                 return;
             }
             if (event.data.trim() != "") {
+                var serverName = event.data.split('æ')[0];
+                var userCount = parseInt(event.data.split('æ')[1]);
+                if (serverName == "BoraServer1") { server1 = userCount; } else if (serverName == "BoraServer2") { server2 = userCount; }
                 console.log(event.data);
-                document.getElementById("message").innerHTML = event.data;
+                console.log("Server1:" + server1)
+                console.log("Server2:" + server2)
+                document.getElementById("message").innerHTML = (server1+server2);
             }
         }
 

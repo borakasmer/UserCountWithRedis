@@ -80,6 +80,7 @@ namespace UserCountWithRedis.Controllers
                     await CheckAndSetUserCount(client, UserClass.users.Count(), false, false); 
                 }
             }
+            //else if( admin'i Groups'dan çıkarmaya gerek yok. Zaten disconnect durumunda ayrılır!) ÖNEMLI!!!
         }
 
         public async Task CheckAndSetUserCount(IRedisClient client, int userCount, bool isConnect, bool isAdmin)
