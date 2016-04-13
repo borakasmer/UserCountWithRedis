@@ -26,6 +26,7 @@
             console.log(data);
             var serverName = data.split('æ')[0];
             var userCount = data.split('æ')[1];
+            $("#Sunucu").html(serverName);
             //var bodyHtml = "<tr><td>" + serverName + "</td><td>" + userCount + "</td></tr>";            
             //$('#tbody').html(bodyHtml);                        
             $('#' + serverName).html(userCount);
@@ -37,8 +38,9 @@
 <body>
     <div class="container">
         <div class="jumbotron">
-            <h1>Sunuculara Gore Online User Sayisi</h1>
+            <h1>Sunuculara Gore Online User Sayisi </h1>
         </div>
+        <h2><font color="red"> Sunucu: <span id="Sunucu"></span></font></h2>
     </div>
     <table class="table">
         <thead>
@@ -50,7 +52,7 @@
         <tbody id="tbody">
             <tr>
                 <td>Bora Server 1</td>
-                <td id="BoraServer1"></td>
+                <td id="BoraServer1">0</td>
             </tr>
             <tr>
                 <td>Bora Server 2</td>
