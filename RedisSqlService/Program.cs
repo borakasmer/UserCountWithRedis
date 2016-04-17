@@ -24,6 +24,7 @@ namespace RedisSqlService
                             string serverName = message.Split('æ')[0];
                             string userCount = message.Split('æ')[1];
                             Console.WriteLine(DateTime.Now.ToString()+" : "+ serverName +" " +userCount);
+                            SaveData(serverName, int.Parse(userCount)).Wait();
                         }
                         catch (Exception ex)
                         {
@@ -35,6 +36,19 @@ namespace RedisSqlService
             }
 
             Console.ReadLine();
+        }
+
+        public static async Task SaveData(string serverName, int userCount)
+        {
+            using (UserCountContext dbContext = new UserCountContext())
+            {
+                UserCount data = new UserCount();
+                data.DateTime = DateTime.Now;
+                data.ServerName = serverName;
+                data.UserCount1 = userCount;
+                dbContext.UserCounts.Add(data);
+                await dbContext.SaveChangesAsync();
+            }
         }
     }
 }
